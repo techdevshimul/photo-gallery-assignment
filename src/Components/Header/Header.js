@@ -19,7 +19,7 @@ const Header = props => {
 
     let links = null;
     let userIdMatched = null;
-    let verifiedUser = "3RIT1nCJVChhBUtX4keG0TAujpB3";
+    let verifiedUser = "rADcW9tPZGTTnsfkOFH9PSxu3rs1";
 
     if (verifiedUser === props.userId) {
         userIdMatched = (
