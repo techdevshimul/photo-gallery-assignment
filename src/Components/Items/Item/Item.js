@@ -61,7 +61,7 @@ class Item extends Component {
                             Category : {item.categoryName}
                         </CardSubtitle>
                         <CardText>
-                            {item.details}
+                            Details: {item.details}
                         </CardText>
                         {/* <CardText>
                             Price : {item.price} <span style={{ fontSize: "22px" }}>&#2547;</span>
