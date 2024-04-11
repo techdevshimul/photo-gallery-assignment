@@ -11,11 +11,11 @@ import { authCheck, fetchCategories, fetchComments, fetchItems } from '../Redux/
 import Home from './Home/Home';
 import Forms from './Forms/Forms';
 import ItemForm from './Forms/ItemForm/ItemForm';
-import CheckOutForm from './Forms/CheckOutForm/CheckOutForm';
-import Orders from './Orders/Orders';
+// import CheckOutForm from './Forms/CheckOutForm/CheckOutForm';
+// import Orders from './Orders/Orders';
 import CategoryForm from './Forms/CategoryForm/CategoryForm';
 import Logout from './Auth/Logout';
-import { categoriesUrl, categoryFormUrl, checkoutUrl, formsUrl, itemFormUrl, itemsUrl, loginUrl, logoutUrl, ordersUrl } from '../Redux/dataBase';
+import { categoriesUrl, categoryFormUrl, formsUrl, itemFormUrl, itemsUrl, loginUrl, logoutUrl } from '../Redux/dataBase';
 import Auth from './Auth/Auth';
 
 const mapStateToProps = state => {
@@ -66,12 +66,12 @@ export class Main extends Component {
                 <Routes>
                     <Route path='/' element={<Home />}></Route>
                     <Route path={itemsUrl} element={<Items />}></Route>
-                    <Route path={ordersUrl} element={<Orders />}></Route>
+                    {/* <Route path={ordersUrl} element={<Orders />}></Route> */}
                     <Route path={formsUrl} element={<Forms />}></Route>
                     <Route path={itemFormUrl} element={<ItemForm />}></Route>
                     <Route path={categoryFormUrl} element={<CategoryForm />}></Route>
                     <Route path={categoriesUrl} element={<Categories />}></Route>
-                    <Route path={itemsUrl + '/:id' + checkoutUrl} element={<CheckOutForm />}></Route>
+                    {/* <Route path={itemsUrl + '/:id' + checkoutUrl} element={<CheckOutForm />}></Route> */}
                     <Route path={itemsUrl + '/:id'} element={<ItemDetails />}></Route>
                     <Route path={categoriesUrl + '/:id'} element={<CategoryItems />}></Route>
                     <Route path={logoutUrl} element={<Logout />}></Route>

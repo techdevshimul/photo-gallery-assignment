@@ -27,23 +27,24 @@ class Item extends Component {
     render() {
 
         const { item } = this.props;
-        let stock;
+        // let stock;
 
-        if (item.remainAmount === 0) {
-            stock = (<div>
-                <p style={{ fontWeight: "bold" }} className='text-danger'>Out Of Stock!</p>
-            </div>);
-        } else if (item.remainAmount <= 5) {
-            stock = (<div>
-                <p style={{ fontWeight: "bold", color: "orangered" }}>Low On Stock! Only {item.remainAmount} Photos Left!</p>
-            </div>);
-        } else {
-            stock = (
-                (<div>
-                    <p style={{ fontWeight: "bold" }} className='text-success'>Stock Available!</p>
-                </div>)
-            );
-        }
+        // if (item.remainAmount === 0) {
+        //     stock = (<div>
+        //         <p style={{ fontWeight: "bold" }} className='text-danger'>Out Of Stock!</p>
+        //     </div>);
+        // } else if (item.remainAmount <= 5) {
+        //     stock = (<div>
+        //         <p style={{ fontWeight: "bold", color: "orangered" }}>Low On Stock! Only {item.remainAmount} Photos Left!</p>
+        //     </div>);
+        // }
+        // else {
+        //     stock = (
+        //         (<div>
+        //             <p style={{ fontWeight: "bold" }} className='text-success'>Stock Available!</p>
+        //         </div>)
+        //     );
+        // }
 
         return (
             <div className='p-2'>
@@ -62,10 +63,10 @@ class Item extends Component {
                         <CardText>
                             {item.details}
                         </CardText>
-                        <CardText>
+                        {/* <CardText>
                             Price : {item.price} <span style={{ fontSize: "22px" }}>&#2547;</span>
                         </CardText>
-                        {stock}
+                        {stock} */}
                         <Link to={itemsUrl + "/" + item.id}>
                             <Button color="primary" style={{ width: "100%" }} onClick={this.handleButtonClick}>See Details</Button>
                         </Link>

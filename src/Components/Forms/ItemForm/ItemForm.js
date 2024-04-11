@@ -46,7 +46,7 @@ class ItemForm extends Component {
     }
 
     submitHandler = () => {
-        if (this.state.values.title !== "" && this.state.values.image !== "" && this.state.values.desc !== "" && this.state.values.details !== "" && this.state.values.price !== "" && this.state.values.remainAmount !== "" && this.state.values.totalAmount !== "") {
+        if (this.state.values.title !== "" && this.state.values.image !== "" && this.state.values.desc !== "" && this.state.values.details !== "") {
             this.setState({
                 isLoading: true
             })
@@ -117,12 +117,12 @@ class ItemForm extends Component {
                             {categoryOptions}
                         </select>
                         <br />
-                        <input type='number' name='price' className='form-control' value={this.state.values.price} placeholder='Price' onChange={(e) => this.inputChangerHandler(e)} />
+                        {/* <input type='number' name='price' className='form-control' value={this.state.values.price} placeholder='Price' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
                         <input type='number' name='remainAmount' className='form-control' value={this.state.values.remainAmount} placeholder='Remaining Amount' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
                         <input type='number' name='totalAmount' className='form-control' value={this.state.values.totalAmount} placeholder='Total Amount' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
+                        <br /> */}
                         <textarea className='border p-2' style={{ width: "100%" }} name='desc' value={this.state.values.desc} placeholder='Description' onChange={(e) => this.inputChangerHandler(e)}>
                         </textarea>
                         <br />

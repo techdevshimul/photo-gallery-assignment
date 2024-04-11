@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Comments from '../Comments/Comments';
 import LinkError from '../../ErrorHandling/LinkError';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { orderItem, selectedItemFunc } from '../../../Redux/actionCreators';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { checkoutUrl, itemsUrl } from '../../../Redux/dataBase';
+// import { checkoutUrl, itemsUrl } from '../../../Redux/dataBase';
 import Spinner from '../../Spinner/Spinner';
-import dateFormat from "dateformat";
+// import dateFormat from "dateformat";
 
 
 const mapStateToProps = state => {
@@ -155,22 +155,22 @@ class ItemDetails extends Component {
                     }
                 })
             }
-            if (this.props.token != null) {
-                if (this.props.selectedItem.remainAmount !== 0) {
-                    if (this.state.orderData.quantity <= 1) {
-                        document.getElementById("decreaseButton").classList.add("disabled");
-                    }
-                    if (this.state.orderData.quantity > 1) {
-                        document.getElementById("decreaseButton").classList.remove("disabled");
-                    }
-                    if (this.state.orderData.quantity === this.props.selectedItem.remainAmount) {
-                        document.getElementById("increaseButton").classList.add("disabled");
-                    }
-                    if (this.state.orderData.quantity < this.props.selectedItem.remainAmount) {
-                        document.getElementById("increaseButton").classList.remove("disabled");
-                    }
-                }
-            }
+            // if (this.props.token != null) {
+            //     if (this.props.selectedItem.remainAmount !== 0) {
+            //         if (this.state.orderData.quantity <= 1) {
+            //             document.getElementById("decreaseButton").classList.add("disabled");
+            //         }
+            //         if (this.state.orderData.quantity > 1) {
+            //             document.getElementById("decreaseButton").classList.remove("disabled");
+            //         }
+            //         if (this.state.orderData.quantity === this.props.selectedItem.remainAmount) {
+            //             document.getElementById("increaseButton").classList.add("disabled");
+            //         }
+            //         if (this.state.orderData.quantity < this.props.selectedItem.remainAmount) {
+            //             document.getElementById("increaseButton").classList.remove("disabled");
+            //         }
+            //     }
+            // }
         }
         else {
             this.setSelectedItem();
@@ -184,7 +184,7 @@ class ItemDetails extends Component {
             image: ""
         };
 
-        let sellOrOutOfStockOrLogin = null;
+        // let sellOrOutOfStockOrLogin = null;
 
         if (this.props.itemLoading === false) {
             if (this.props.selectedItem == null) {
@@ -195,45 +195,45 @@ class ItemDetails extends Component {
 
                 document.title = this.props.selectedItem.title + " - Photo Gallery App";
                 if (this.props.selectedItem.remainAmount !== 0) {
-                    if (this.props.token != null) {
-                        sellOrOutOfStockOrLogin = (
-                            <div>
-                                <div className='d-flex flex-wrap align-items-center'>
-                                    <p style={{ fontWeight: "bold" }}>Quantity : </p>
-                                    <Button id='decreaseButton' color='secondary' style={{ marginLeft: "10px" }} onClick={this.decreaseQuantity}>-</Button>
-                                    <p className="border d-flex align-items-center justify-content-center " style={{ borderRadius: "5px", minWidth: "50px", height: "40px", textAlign: "center", margin: "0px 5px" }}>{this.state.orderData.quantity}</p>
-                                    <Button id='increaseButton' color='secondary' onClick={this.increaseQuantity}>+</Button>
-                                </div>
-                                <br />
-                                <Link to={itemsUrl + "/" + this.props.selectedItem.id + checkoutUrl}>
-                                    <Button color='success mt-2 ms-2' style={{ width: "170px" }} onClick={this.submitHandler}>Buy Now</Button>
-                                </Link>
-                                <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Go Back</Button>
-                            </div>
-                        );
-                    } else {
-                        sellOrOutOfStockOrLogin = (
-                            <div>
-                                <Link to="/login">
-                                    <Button className='ms-2 mt-2' style={{ width: "170px" }} color="danger">Login To Buy</Button>
-                                </Link>
-                                <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Go Back</Button>
-                            </div>
-                        )
-                    }
+                    // if (this.props.token != null) {
+                    //     sellOrOutOfStockOrLogin = (
+                    //         <div>
+                    //             <div className='d-flex flex-wrap align-items-center'>
+                    //                 <p style={{ fontWeight: "bold" }}>Quantity : </p>
+                    //                 <Button id='decreaseButton' color='secondary' style={{ marginLeft: "10px" }} onClick={this.decreaseQuantity}>-</Button>
+                    //                 <p className="border d-flex align-items-center justify-content-center " style={{ borderRadius: "5px", minWidth: "50px", height: "40px", textAlign: "center", margin: "0px 5px" }}>{this.state.orderData.quantity}</p>
+                    //                 <Button id='increaseButton' color='secondary' onClick={this.increaseQuantity}>+</Button>
+                    //             </div>
+                    //             <br />
+                    //             <Link to={itemsUrl + "/" + this.props.selectedItem.id + checkoutUrl}>
+                    //                 <Button color='success mt-2 ms-2' style={{ width: "170px" }} onClick={this.submitHandler}>Buy Now</Button>
+                    //             </Link>
+                    //             <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Go Back</Button>
+                    //         </div>
+                    //     );
+                    // } else {
+                    //     sellOrOutOfStockOrLogin = (
+                    //         <div>
+                    //             <Link to="/login">
+                    //                 <Button className='ms-2 mt-2' style={{ width: "170px" }} color="danger">Login To Buy</Button>
+                    //             </Link>
+                    //             <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Go Back</Button>
+                    //         </div>
+                    //     )
+                    // }
 
                 } else {
-                    sellOrOutOfStockOrLogin = (
-                        <div>
-                            <p className='bg-danger p-2 text-white' style={{ fontWeight: 'bold', fontSize: "25px", display: 'inline', border: "1px solid gray", borderRadius: "5px" }}>Out Of Stock!</p>
-                            <br />
-                            <br />
-                            <Link to={itemsUrl}>
-                                <Button color='success' className='ms-2 mt-2' style={{ width: "170px" }} >Browse Other Photos</Button>
-                            </Link>
-                            <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Back</Button>
-                        </div>
-                    );
+                    // sellOrOutOfStockOrLogin = (
+                    //     <div>
+                    //         <p className='bg-danger p-2 text-white' style={{ fontWeight: 'bold', fontSize: "25px", display: 'inline', border: "1px solid gray", borderRadius: "5px" }}>Out Of Stock!</p>
+                    //         <br />
+                    //         <br />
+                    //         <Link to={itemsUrl}>
+                    //             <Button color='success' className='ms-2 mt-2' style={{ width: "170px" }} >Browse Other Photos</Button>
+                    //         </Link>
+                    //         <Button color='secondary' className='ms-2 mt-2' style={{ width: "170px" }} onClick={this.goBack}>Back</Button>
+                    //     </div>
+                    // );
                 }
 
 
@@ -258,9 +258,9 @@ class ItemDetails extends Component {
                                     <h4><span style={{ fontWeight: 'bold' }}>Title : </span>{this.props.selectedItem.title}</h4>
                                     <p><span style={{ fontWeight: 'bold' }}>Category :   </span>{this.props.selectedItem.categoryName}</p>
                                     <p>
-                                        <span style={{ fontWeight: 'bold' }}>Details : </span>{this.props.selectedItem.details}
+                                        <span style={{ fontWeight: 'bold' }}>Descriptions : </span>{this.props.selectedItem.desc}
                                     </p>
-                                    <p>
+                                    {/* <p>
                                         <span className='me-2'><span style={{ fontWeight: 'bold' }}>Stock : </span>{this.props.selectedItem.remainAmount}</span>
                                         <span><span style={{ fontWeight: 'bold' }}>Sold : </span>{this.props.selectedItem.totalAmount - this.props.selectedItem.remainAmount}</span>
                                     </p>
@@ -269,20 +269,20 @@ class ItemDetails extends Component {
                                     </p>
                                     <p>
                                         <span style={{ fontWeight: 'bold' }}>Last Sold : </span> {dateFormat(this.props.selectedItem.updatedTime, "dS mmmm yyyy, h:MM TT")}
-                                    </p>
+                                    </p> */}
 
-                                    {sellOrOutOfStockOrLogin}
+                                    {/* {sellOrOutOfStockOrLogin} */}
 
 
                                 </div>
                             </div>
                         </div>
-                        <div className='pe-2 ps-2 mt-2'>
+                        {/* <div className='pe-2 ps-2 mt-2'>
                             <div className='p-2 h-100 w-100 fgColor textColor' style={{ border: "1px solid gray" }}>
                                 <h5 style={{ fontWeight: 'bold' }}>Descriptions : </h5>
                                 {this.props.selectedItem.desc}
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className='pe-2 ps-2 mt-3 mb-3'>
                             <div className='p-2 w-100 h-100 fgColor textColor' style={{ border: "1px solid gray" }}>
