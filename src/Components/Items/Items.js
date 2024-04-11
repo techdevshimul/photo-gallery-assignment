@@ -30,7 +30,7 @@ class Items extends Component {
 
     render() {
 
-        document.title = "Rooms - Photo Gallery App";
+        document.title = "Photos - Photo Gallery App";
 
         let items = null;
         if (this.props.itemErr) {
