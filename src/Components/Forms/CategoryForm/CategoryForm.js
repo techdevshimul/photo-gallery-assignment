@@ -87,8 +87,8 @@ class CategoryForm extends Component {
                         <br />
                         <input name='image' className='form-control' value={this.state.values.image} placeholder='Image URL' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
-                        <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
+                        {/* <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
+                        <br /> */}
                         <br />
                         <Button color='success' className='me-auto' onClick={this.submitHandler} disabled={this.props.purchaseble}>Submit Category</Button>
                         <Link to="/">

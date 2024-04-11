@@ -35,9 +35,9 @@ class Category extends Component {
                         <CardTitle tag="h5">
                             {category.title}
                         </CardTitle>
-                        <CardText>
+                        {/* <CardText>
                             {category.details}
-                        </CardText>
+                        </CardText> */}
                         <Link to={categoriesUrl + "/" + category.title}>
                             <Button color="primary" style={{ width: "100%" }} onClick={this.handleButtonClick}>Browse</Button>
                         </Link>

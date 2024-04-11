@@ -46,7 +46,7 @@ class ItemForm extends Component {
     }
 
     submitHandler = () => {
-        if (this.state.values.title !== "" && this.state.values.image !== "" && this.state.values.desc !== "" && this.state.values.details !== "" && this.state.values.price !== "" && this.state.values.remainAmount !== "" && this.state.values.totalAmount !== "") {
+        if (this.state.values.title !== "" && this.state.values.image !== "") {
             this.setState({
                 isLoading: true
             })
@@ -109,23 +109,23 @@ class ItemForm extends Component {
                         <br />
                         <input name='image' className='form-control' value={this.state.values.image} placeholder='Image URL' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
-                        <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
+                        {/* <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
+                        <br /> */}
                         {/* <input name='categoryName' className='form-control' value={this.state.values.categoryName} placeholder='Category Name' onChange={(e) => this.inputChangerHandler(e)} />
                         <br /> */}
                         <select name="categoryName" className='form-control' value={this.state.values.categoryName} onChange={(e) => this.inputChangerHandler(e)} >
                             {categoryOptions}
                         </select>
                         <br />
-                        <input type='number' name='price' className='form-control' value={this.state.values.price} placeholder='Price' onChange={(e) => this.inputChangerHandler(e)} />
+                        {/* <input type='number' name='price' className='form-control' value={this.state.values.price} placeholder='Price' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
                         <input type='number' name='remainAmount' className='form-control' value={this.state.values.remainAmount} placeholder='Remaining Amount' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
                         <input type='number' name='totalAmount' className='form-control' value={this.state.values.totalAmount} placeholder='Total Amount' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
-                        <textarea className='border p-2' style={{ width: "100%" }} name='desc' value={this.state.values.desc} placeholder='Description' onChange={(e) => this.inputChangerHandler(e)}>
+                        <br /> */}
+                        {/* <textarea className='border p-2' style={{ width: "100%" }} name='desc' value={this.state.values.desc} placeholder='Description' onChange={(e) => this.inputChangerHandler(e)}>
                         </textarea>
-                        <br />
+                        <br /> */}
                         <br />
                         <Button color='success' className='me-auto' onClick={this.submitHandler}>Submit Photo</Button>
                         <Link to="/">

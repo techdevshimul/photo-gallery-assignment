@@ -1,43 +1,128 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { success } from "../../notify";
-import { Button } from "reactstrap"
+// import { connect } from 'react-redux';
+// import { success } from "../../notify";
+import {
+    Button, Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption,
+} from "reactstrap"
 import { Link } from 'react-router-dom';
 import { categoriesUrl, itemsUrl } from '../../Redux/dataBase';
 
-const mapStateToProps = state => {
-    return {
-        items: state.items,
-        itemLoading: state.itemLoading,
-        itemErr: state.itemErr,
-        selectedItem: state.selectedItem,
-        selectedCategory: state.selectedCategory,
-        comments: state.comments,
-        commentLoading: state.commentLoading,
-        categoryLoading: state.categoryLoading,
-        commentErr: state.commentErr,
-        categoryErr: state.categoryErr
-    }
-}
+const items = [
+    {
+        src: 'https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg',
+        altText: 'Pink Flower',
+        caption: 'Pink Flower',
+        key: 1,
+    },
+    {
+        src: 'https://images.pexels.com/photos/67857/daisy-flower-spring-marguerite-67857.jpeg',
+        altText: 'White Flower',
+        caption: 'White Flower',
+        key: 2,
+    },
+    {
+        src: 'https://images.pexels.com/photos/1477166/pexels-photo-1477166.jpeg',
+        altText: 'Orange Flower',
+        caption: 'Orange Flower',
+        key: 3,
+    },
+    {
+        src: 'https://images.pexels.com/photos/54323/rose-composites-flowers-spring-54323.jpeg',
+        altText: 'Pink Flower 2',
+        caption: 'Pink Flower 2',
+        key: 4,
+    },
+    {
+        src: 'https://images.pexels.com/photos/53135/hydrangea-blossom-bloom-flower-53135.jpeg',
+        altText: 'Blue Flower',
+        caption: 'Blue Flower',
+        key: 5,
+    },
+];
 
 class Home extends Component {
-    componentDidUpdate() {
-        if (!this.props.itemLoading && !this.props.commentLoading && !this.props.categoryLoading && !this.props.categoryErr && !this.props.itemErr && !this.props.commentErr) {
-            success("Database Updated...", true);
-        }
-    }
+    state = {
+        activeIndex: 0,
+        animating: false,
+    };
+
+
+    next = () => {
+        if (this.state.animating) return;
+        const nextIndex =
+            this.state.activeIndex === items.length - 1
+                ? 0
+                : this.state.activeIndex + 1;
+        this.setState({ activeIndex: nextIndex });
+    };
+
+    previous = () => {
+        if (this.state.animating) return;
+        const nextIndex =
+            this.state.activeIndex === 0
+                ? items.length - 1
+                : this.state.activeIndex - 1;
+        this.setState({ activeIndex: nextIndex });
+    };
+
+    goToIndex = (newIndex) => {
+        if (this.state.animating) return;
+        this.setState({ activeIndex: newIndex });
+    };
+
+    // componentDidUpdate() {
+    //     if (!this.props.itemLoading && !this.props.commentLoading && !this.props.categoryLoading && !this.props.categoryErr && !this.props.itemErr && !this.props.commentErr) {
+    //         success("Database Updated...", true);
+    //     }
+    // }
     render() {
         document.title = "Home - Photo Gallery App";
+
+        const { activeIndex } = this.state;
+
+        const slides = items.map((item) => (
+            <CarouselItem
+                onExiting={() => this.setState({ animating: true })}
+                onExited={() => this.setState({ animating: false })}
+                key={item.src}
+            >
+                <img src={item.src} alt={item.altText} style={{ aspectRatio: "16/9", objectFit: 'cover', width: "100%", height: "500px", borderRadius: "10px" }} />
+                <CarouselCaption
+                    captionHeader={item.caption}
+                    captionText={item.caption}
+                />
+            </CarouselItem>
+        ));
 
         return (
             <div >
                 <div>
-                    <div className='p-2 m-2' style={{ backgroundColor: "white", textAlign: "center", borderRadius: "10px" }}>
+                    <div className='p-2 m-2 fgColor' style={{ textAlign: "center", borderRadius: "10px" }}>
                         <div>
-                            <div style={{ width: "100%", marginBottom: "10px" }}>
-                                <img className="img-fluid" alt="Home" src="https://images.pexels.com/photos/132474/pexels-photo-132474.jpeg" style={{ aspectRatio: "16/9", objectFit: 'cover', width: "100%", height: "300px", borderRadius: "10px" }} />
-                            </div>
-                            <h1>The Great Ever Flowers Gallary</h1>
+                            <Carousel
+                                activeIndex={activeIndex}
+                                next={this.next}
+                                previous={this.previous}
+                                {...this.props}
+                            >
+                                <CarouselIndicators
+                                    items={items}
+                                    activeIndex={activeIndex}
+                                    onClickHandler={this.goToIndex}
+                                />
+                                {slides}
+                                <CarouselControl
+                                    direction="prev"
+                                    directionText="Previous"
+                                    onClickHandler={this.previous}
+                                />
+                                <CarouselControl
+                                    direction="next"
+                                    directionText="Next"
+                                    onClickHandler={this.next}
+                                />
+                            </Carousel>
+                            <h1 className='mt-3'>The Great Ever Flowers Gallary</h1>
                             <p style={{ fontSize: "20px", color: "grey" }}>Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.
                             </p>
                             <Link to={itemsUrl}>
@@ -48,7 +133,7 @@ class Home extends Component {
                             </Link>
                         </div>
                     </div>
-                    <div className='p-2 m-2' style={{ backgroundColor: "white", textAlign: "center", borderRadius: "10px" }}>
+                    <div className='p-2 m-2 fgColor' style={{ textAlign: "center", borderRadius: "10px" }}>
                         <div style={{ margin: "25px 5px 25px 5px" }} >
                             <h2>Why Flowers Are Important In Our Life?</h2>
                             <p style={{ fontSize: "18px", color: "grey" }}>
@@ -63,7 +148,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='p-2 m-2' style={{ backgroundColor: "white", textAlign: "center", borderRadius: "10px" }}>
+                    <div className='p-2 m-2 fgColor' style={{ textAlign: "center", borderRadius: "10px" }}>
                         <div style={{ margin: "25px 5px 25px 5px" }} >
                             <h2>How Do Flowers Help Humans?</h2>
                             <p style={{ fontSize: "18px", color: "grey" }}>
@@ -78,7 +163,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='p-2 m-2' style={{ backgroundColor: "white", borderRadius: "10px", textAlign: "left" }}>
+                    <div className='p-2 m-2 fgColor' style={{ borderRadius: "10px", textAlign: "left" }}>
                         <div style={{ margin: "25px 5px 25px 5px" }} >
                             <h3>About Flowers : </h3>
                             <p style={{ fontSize: "18px", color: "grey" }}>
@@ -118,4 +203,4 @@ class Home extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+export default (Home);

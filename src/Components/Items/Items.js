@@ -25,7 +25,7 @@ class Items extends Component {
 
 
     componentDidMount() {
-        // this.props.fetchItems();
+        this.props.fetchItems();
     }
 
     render() {

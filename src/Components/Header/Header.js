@@ -68,7 +68,7 @@ const Header = props => {
 
     return (
         <div>
-            <Navbar color="dark" dark expand="sm" style={{ textAlign: "center" }}>
+            <Navbar color="light" expand="sm" style={{ textAlign: "center" }}>
                 <NavbarToggler onClick={navToggle} />
                 <NavbarBrand href="/">
                     Photo Gallery App
