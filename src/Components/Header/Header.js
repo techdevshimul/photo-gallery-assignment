@@ -57,9 +57,6 @@ const Header = props => {
                 <NavItem>
                     <Link to={categoriesUrl} className="nav-link">Categories</Link>
                 </NavItem>
-                {/* <NavItem>
-                    <Link to={ordersUrl} className="nav-link">Orders</Link>
-                </NavItem> */}
                 <NavItem>
                     <Link to={logoutUrl} className="nav-link">Logout</Link>
                 </NavItem>

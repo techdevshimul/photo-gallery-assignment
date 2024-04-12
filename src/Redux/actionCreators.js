@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import { baseUrl, categoriesUrl, commentsUrl, extensionFormat, itemsUrl, ordersUrl } from './dataBase';
+import { baseUrl, categoriesUrl, commentsUrl, extensionFormat, itemsUrl } from './dataBase';
 
 export const loadItems = items => {
     return {
@@ -22,30 +22,6 @@ export const fetchItems = () => dispatch => {
         })
         .catch(err => {
             dispatch(itemLoadFailed());
-        })
-}
-
-export const loadOrders = orders => {
-    return {
-        type: actionTypes.LOAD_ORDERS,
-        payload: orders
-    }
-}
-
-export const orderLoadFailed = () => {
-    return {
-        type: actionTypes.ORDER_LOAD_FAILED
-    }
-}
-
-export const fetchOrders = (token, userId) => dispatch => {
-    const queryParams = '&orderBy="userId"&equalTo="' + userId + '"';
-    axios.get(baseUrl + ordersUrl + extensionFormat + '?auth=' + token + queryParams)
-        .then(response => {
-            dispatch(loadOrders(response.data));
-        })
-        .catch(err => {
-            dispatch(orderLoadFailed());
         })
 }
 
@@ -107,13 +83,6 @@ export const selectedCategoryFunc = category => {
     return {
         type: actionTypes.SELECTED_CATEGORY,
         payload: category
-    }
-}
-
-export const orderItem = orderData => {
-    return {
-        type: actionTypes.ORDER_ITEM,
-        payload: orderData
     }
 }
 
@@ -247,67 +216,3 @@ export const commentSubmitSuccess = successMsg => {
         payload: successMsg
     }
 }
-
-export const checkOut = (order, token, selectedItem) => dispatch => {
-    dispatch(checkoutLoading(true));
-
-    axios.post(baseUrl + ordersUrl + extensionFormat + "?auth=" + token, order)
-        .then(response => {
-            if (response.status === 200) {
-                const newItem = {
-                    ...selectedItem,
-                    remainAmount: selectedItem.remainAmount - order.item.quantity,
-                    updatedTime: new Date()
-                }
-                axios.put(baseUrl + itemsUrl + "/" + selectedItem.id + extensionFormat, newItem)
-                    .then(response => {
-                        dispatch(fetchItems());
-                        dispatch(fetchOrders());
-                        dispatch(checkoutLoading(false));
-                        dispatch(checkoutSuccess("Order Placed And Photo Has Been Updated. Redirecting To Homepage!"));
-                        setTimeout(() => dispatch(checkoutSuccess(null)), 3000);
-                        setTimeout(() => dispatch(checkoutFailed(null)), 3000);
-                        setTimeout(() => window.location.reload(false), 3000);
-                    })
-                    .catch(err => {
-                        dispatch(checkoutSuccess(null));
-                        dispatch(checkoutLoading(false));
-                        dispatch(checkoutFailed(err.message));
-                        setTimeout(() => dispatch(checkoutSuccess(null)), 3000);
-                        setTimeout(() => dispatch(checkoutFailed(null)), 3000);
-                        console.log("Something Went Wrong! Order Again!");
-                    });
-            } else {
-                console.log("Something Went Wrong! Order Again!");
-            }
-        })
-        .catch(err => {
-            dispatch(checkoutSuccess(null));
-            dispatch(checkoutLoading(false));
-            dispatch(checkoutFailed(err.message));
-            setTimeout(() => dispatch(checkoutSuccess(null)), 3000);
-            setTimeout(() => dispatch(checkoutFailed(null)), 3000);
-            console.log("Something Went Wrong! Order Again!");
-        });
-}
-
-export const checkoutLoading = isLoading => {
-    return {
-        type: actionTypes.CHECKOUT_LOADING,
-        payload: isLoading,
-    }
-}
-
-export const checkoutFailed = errMsg => {
-    return {
-        type: actionTypes.CHECKOUT_FAILED,
-        payload: errMsg
-    }
-}
-export const checkoutSuccess = successMsg => {
-    return {
-        type: actionTypes.CHECKOUT_SUCCESS,
-        payload: successMsg
-    }
-}
-

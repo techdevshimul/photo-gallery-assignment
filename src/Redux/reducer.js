@@ -15,17 +15,6 @@ const INITIAL_STATE = {
     categoryErr: false,
     selectedCategory: null,
 
-    orders: [],
-    orderLoading: true,
-    orderErr: false,
-    orderData: {
-        quantity: 1,
-        totalPayable: 1
-    },
-
-    purchaseable: false,
-    onClickCheckout: false,
-
     token: null,
     userId: null,
     authLoading: false,
@@ -35,9 +24,6 @@ const INITIAL_STATE = {
     commentSubmitSuccess: null,
     commentSubmitLoading: false,
 
-    checkoutLoading: false,
-    checkoutSuccess: null,
-    checkoutFailed: null
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -103,27 +89,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 categoryLoading: false,
             }
 
-        case actionTypes.LOAD_ORDERS:
-            let orders = [];
-            for (let key in action.payload) {
-                orders.push({
-                    ...action.payload[key],
-                    id: key,
-                })
-            }
-
-            return {
-                ...state,
-                orders: orders,
-                orderLoading: false,
-            }
-        case actionTypes.ORDER_LOAD_FAILED:
-            return {
-                ...state,
-                orderErr: true,
-                orderLoading: false,
-            }
-
         case actionTypes.SELECTED_ITEM:
             return {
                 ...state,
@@ -133,11 +98,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 selectedCategory: action.payload
-            }
-        case actionTypes.ORDER_ITEM:
-            return {
-                ...state,
-                orderData: action.payload,
             }
         case actionTypes.AUTH_SUCCESS:
             return {
@@ -176,21 +136,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 commentSubmitLoading: action.payload,
-            }
-        case actionTypes.CHECKOUT_FAILED:
-            return {
-                ...state,
-                checkoutFailed: action.payload,
-            }
-        case actionTypes.CHECKOUT_SUCCESS:
-            return {
-                ...state,
-                checkoutSuccess: action.payload
-            }
-        case actionTypes.CHECKOUT_LOADING:
-            return {
-                ...state,
-                checkoutLoading: action.payload,
             }
         default:
             return state;

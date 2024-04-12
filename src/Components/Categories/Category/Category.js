@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap';
+import { Button, Card, CardBody, CardTitle } from 'reactstrap';
 import { connect } from 'react-redux';
 import { selectedCategoryFunc } from '../../../Redux/actionCreators';
 import { categoriesUrl } from '../../../Redux/dataBase';

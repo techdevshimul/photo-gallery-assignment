@@ -4,7 +4,7 @@ import { Button, Modal, ModalBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../Spinner/Spinner';
-import { baseUrl, categoriesUrl, extensionFormat, itemsUrl, ordersUrl } from '../../../Redux/dataBase';
+import { baseUrl, categoriesUrl, extensionFormat, itemsUrl } from '../../../Redux/dataBase';
 
 const mapStateToProps = state => {
     return {
@@ -87,8 +87,6 @@ class CategoryForm extends Component {
                         <br />
                         <input name='image' className='form-control' value={this.state.values.image} placeholder='Image URL' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
-                        {/* <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br /> */}
                         <br />
                         <Button color='success' className='me-auto' onClick={this.submitHandler} disabled={this.props.purchaseble}>Submit Category</Button>
                         <Link to="/">
@@ -107,9 +105,7 @@ class CategoryForm extends Component {
                     <ModalBody>
                         <p style={{ textAlign: 'center' }}>{this.state.modalMsg}</p>
                         <div className='d-flex justify-content-center mr-auto flex-wrap'>
-                            <Link to={ordersUrl}>
-                                <Button color='secondary' className='m-1' >Orders</Button>
-                            </Link>
+
                             <Link to={itemsUrl}>
                                 <Button color='secondary' className='m-1' >Photos</Button>
                             </Link>

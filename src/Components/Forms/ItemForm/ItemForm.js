@@ -4,7 +4,7 @@ import { Button, Modal, ModalBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../Spinner/Spinner';
-import { baseUrl, categoriesUrl, extensionFormat, itemsUrl, ordersUrl } from '../../../Redux/dataBase';
+import { baseUrl, categoriesUrl, extensionFormat, itemsUrl } from '../../../Redux/dataBase';
 
 const mapStateToProps = state => {
     return {
@@ -20,13 +20,6 @@ class ItemForm extends Component {
             categoryName: "",
             title: "",
             image: "",
-            desc: "",
-            details: "",
-            price: "",
-            remainAmount: "",
-            totalAmount: "",
-            addTime: new Date(),
-            updatedTime: new Date()
         }
     }
 
@@ -62,13 +55,6 @@ class ItemForm extends Component {
                                 categoryName: "",
                                 title: "",
                                 image: "",
-                                desc: "",
-                                details: "",
-                                price: "",
-                                remainAmount: "",
-                                totalAmount: "",
-                                addTime: new Date(),
-                                updatedTime: new Date(),
                             }
                         })
                     } else {
@@ -95,7 +81,7 @@ class ItemForm extends Component {
         if (this.props.categoryLoading === false) {
             categoryOptions = this.props.categories.map(category => {
                 return (
-                    <option key={Math.random()} value={category.title}>{category.title}</option>
+                    <option key={category.id} value={category.title}>{category.title}</option>
                 )
             })
         }
@@ -109,23 +95,10 @@ class ItemForm extends Component {
                         <br />
                         <input name='image' className='form-control' value={this.state.values.image} placeholder='Image URL' onChange={(e) => this.inputChangerHandler(e)} />
                         <br />
-                        {/* <input name='details' className='form-control' value={this.state.values.details} placeholder='Details' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br /> */}
-                        {/* <input name='categoryName' className='form-control' value={this.state.values.categoryName} placeholder='Category Name' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br /> */}
                         <select name="categoryName" className='form-control' value={this.state.values.categoryName} onChange={(e) => this.inputChangerHandler(e)} >
                             {categoryOptions}
                         </select>
                         <br />
-                        {/* <input type='number' name='price' className='form-control' value={this.state.values.price} placeholder='Price' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
-                        <input type='number' name='remainAmount' className='form-control' value={this.state.values.remainAmount} placeholder='Remaining Amount' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br />
-                        <input type='number' name='totalAmount' className='form-control' value={this.state.values.totalAmount} placeholder='Total Amount' onChange={(e) => this.inputChangerHandler(e)} />
-                        <br /> */}
-                        {/* <textarea className='border p-2' style={{ width: "100%" }} name='desc' value={this.state.values.desc} placeholder='Description' onChange={(e) => this.inputChangerHandler(e)}>
-                        </textarea>
-                        <br /> */}
                         <br />
                         <Button color='success' className='me-auto' onClick={this.submitHandler}>Submit Photo</Button>
                         <Link to="/">
@@ -143,9 +116,6 @@ class ItemForm extends Component {
                     <ModalBody>
                         <p style={{ textAlign: 'center' }}>{this.state.modalMsg}</p>
                         <div className='d-flex justify-content-center mr-auto flex-wrap'>
-                            <Link to={ordersUrl}>
-                                <Button color='secondary' className='m-1' >Orders</Button>
-                            </Link>
                             <Link to={itemsUrl}>
                                 <Button color='secondary' className='m-1' >Photos</Button>
                             </Link>
