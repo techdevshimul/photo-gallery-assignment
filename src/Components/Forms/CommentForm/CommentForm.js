@@ -64,15 +64,17 @@ class CommentForm extends Component {
 
                     if (!values.name) {
                         errors.name = "Required"
-                    } else if (values.name.length < 3) {
-                        errors.name = "Must Be 3 Or More Characters!"
                     }
+                    //  else if (values.name.length < 3) {
+                    //     errors.name = "Must Be 3 Or More Characters!"
+                    // }
 
                     if (!values.comment) {
                         errors.comment = "Required"
-                    } else if (values.comment.length < 15) {
-                        errors.comment = "Must Be 15 Or More Characters!"
                     }
+                    //  else if (values.comment.length < ) {
+                    //     errors.comment = "Must Be 15 Or More Characters!"
+                    // }
 
                     return errors;
                 }}
