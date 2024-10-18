@@ -32,23 +32,23 @@ const Header = props => {
     if (props.token === null) {
         links = (<Nav className="me-auto" navbar>
             <NavItem>
-                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/" className="nav-link" >Home</Link>
             </NavItem>
             <NavItem>
-                <Link to={itemsUrl} className="nav-link">Photos</Link>
+                <Link to={itemsUrl} className="nav-link" >Photos</Link>
             </NavItem>
             <NavItem>
-                <Link to={categoriesUrl} className="nav-link">Categories</Link>
+                <Link to={categoriesUrl} className="nav-link" >Categories</Link>
             </NavItem>
             <NavItem>
-                <Link to={loginUrl} className="nav-link">Login</Link>
+                <Link to={loginUrl} className="nav-link" >Login</Link>
             </NavItem>
         </Nav>)
     } else {
         links = (
             <Nav className="me-auto" navbar>
                 <NavItem>
-                    <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/" className="nav-link" onClick={navToggle}>Home</Link>
                 </NavItem>
                 <NavItem>
                     <Link to={itemsUrl} className="nav-link">Photos</Link>
